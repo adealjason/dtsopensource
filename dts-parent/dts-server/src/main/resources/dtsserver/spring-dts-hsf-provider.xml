@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<!-- dts hsf remote store  -->
+	<bean id="hsfRemoteStoreProtocolProvider" class="com.taobao.hsf.app.spring.util.HSFSpringProviderBean">
+		<property name="serviceInterface"
+			value="org.github.dtsopensource.server.store.hsf.IHSFServerStore" />
+		<property name="target" ref="hsfServerStoreProtocol" />
+		<property name="serviceVersion" value="${dts-server.hsf.serviceversion.common}" />
+		<property name="clientTimeout" value="${dts-server.hsf.clienttimeout.common}" />
+		<property name="clientIdleTimeout" value="${dts-server.hsf.clientidletimeout.common}" />
+		<property name="serializeType" value="java" />
+	</bean>
+
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       "
+	default-autowire="byName">
+		
+    <!-- dts连接方式 -->
+	<bean id="dtsConfig" class="org.github.dtsopensource.server.share.DTSConfig">
+		<property name="dtsManageType" value="REMOTE"></property>
+		<property name="app" value="JRTZ-CLEAN"></property>
+		<property name="requestActivityRuleURL" value="http://10.139.56.8:6080/dtsServer/requestRule"></property>
+	</bean>
+	
+	<!-- iStoreProtocol http协议 -->
+	<bean id="httpRemoteStoreProtocol" class="org.github.dtsopensource.core.protocol.http.HttpRemoteStoreProtocol">
+		<property name="serverURL" value="http://10.139.56.8:6080/dtsServer/requestStore"></property>
+		<property name="timeOut" value="20000"></property>
+	</bean>
+	
+    <!-- dts manager -->
+    <bean id="remoteDTSManager" class="org.github.dtsopensource.core.manager.RemoteDTSManager">
+    	<property name="remoteProtocol" ref="httpRemoteStoreProtocol"></property>
+    </bean>
+    
+    <!-- 二阶交易配置 -->
+    <!-- businessActivityControlService -->
+    <bean id="businessActivityControlService" class="org.github.dtsopensource.core.BusinessActivityControlService">
+    	<property name="dtsConfig" ref="dtsConfig"></property>
+    	<property name="dtsManager" ref="remoteDTSManager"></property>
+    </bean>
+    
+    <!-- 二阶事务恢复配置 -->
+    <bean id="remoteHangTransactionJobTracker" class="org.github.dtsopensource.schedule.jobTracker.RemoteJobTrackerDelegate">
+    	<!-- 本地任务注册器 -->
+    	<property name="jobRegister" ref="zookeeperJobRegister"></property>
+    	<!-- 本地任务执行解析器 -->
+    	<property name="timerParse" ref="hangTransactionTimerParse"></property>
+    	<!-- 系统配置 -->
+    	<property name="dtsConfig" ref="dtsConfig"></property>
+    	<!-- 要执行的任务,目前一个，后续可以拓展成数组，如果配置成数组则表示这些任务的执行上述规则都是一致的 -->
+    	<property name="taskTrackerType" value="hangTransaction"></property>
+    	<!-- 配置dts-server requestScheduleURL 地址 -->
+    	<property name="requestScheduleURL" value="http://10.139.56.8:6080/dtsServer/requestSchedule"></property>
+    </bean>
+    
+    <!-- 任务注册器 -->
+    <bean id="zookeeperJobRegister" class="org.github.dtsopensource.schedule.register.zookeeper.ZookeeperJobRegister">
+    	<!-- 要连接的zk地址 -->
+    	<property name="zkConnectionString" value="10.139.103.1:2181"></property>
+    	<property name="ephemeralZnodeParent" value="/za-finance-clean-schedule"></property>
+    	<property name="ephemeralZnodeNamePrefix" value="server-"></property>
+    </bean>
+    
+    <!-- 任务执行解析器 -->
+    <bean id="hangTransactionTimerParse" class="org.github.dtsopensource.schedule.timerParse.springcron.SpringCronParse">
+    	<!-- 执行规则 每1分钟一次-->
+    	<property name="cron" value="0 0/1 * * * ?"></property>
+    </bean>
+    
+</beans>

@@ -1,0 +1,12 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/tx    http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       "
+	default-autowire="byName">
+	
+	<bean id="localDTSRule" class="org.github.dtsopensource.server.rule.impl.LocalDTSRule">
+		<property name="dataSource" ref="dts_tddl-dataSource"></property>
+	</bean>
+</beans>

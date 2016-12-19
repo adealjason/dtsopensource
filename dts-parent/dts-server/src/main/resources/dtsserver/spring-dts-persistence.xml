@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       "
+	default-autowire="byName">
+	
+	<bean id="dts_tddl-dataSource" class="com.taobao.tddl.jdbc.group.TGroupDataSource"
+		init-method="init">
+		<property name="appName" value="${dts-server.tddl.appName}" />
+		<property name="dbGroupKey" value="${dts-server.tddl.dbGroupKey}" />
+	</bean>
+	
+	<!-- dts连接方式 -->
+	<bean id="dtsConfig" class="com.zhongan.dts.server.share.DTSConfig">
+		<property name="dtsManageType" value="LOCAL"></property>
+		<property name="app" value="JRTZ"></property>
+	</bean>
+	
+    <!-- dts manager -->
+    <bean id="localDTSManager" class="com.zhongan.dts.manager.LocalDTSManager">
+    	<property name="dataSource" ref="dts_tddl-dataSource"></property>
+    </bean>
+		
+    <!-- seq -->
+    <bean id="dts_core_idSequenceDao" class="com.taobao.tddl.client.sequence.impl.GroupSequenceDao" init-method="init">
+        <!-- appName，必填 -->
+        <property name="appName" value="${dts-server.tddl.appName}"/>
+        <!-- 数据源的个数 -->
+        <property name="dscount" value="1"/>
+        <!-- 数据库名：从哪些数据库中取ID -->
+        <property name="dbGroupKeys">
+            <list>
+                <value>${dts-server.tddl.dbGroupKey}</value>
+            </list>
+        </property>
+        <!-- 内步长 ,默认为1000，取值在1-100000之间 -->
+        <property name="innerStep" value="5000"/>
+        <!-- 是否开启自适应，默认是false -->
+        <property name="adjust" value="true"/>
+        <!-- 重试次数，在多个gourpDataSource的场景下，建议设置成1-2次。默认为2次 -->
+        <property name="retryTimes" value="2"/>
+        <!-- 使用的表的表名 ，默认为il_sequence -->
+        <property name="tableName" value="dts_sequence"/>
+        <!-- id生成器的字段名,默认为name -->
+        <property name="nameColumnName" value="name"/>
+        <!-- 存值的列的字段名,默认为value -->
+        <property name="valueColumnName" value="value"/>
+        <!-- 存修改时间的字段名 ,默认为gmt_modified -->
+        <property name="gmtModifiedColumnName" value="gmt_modified"/>
+    </bean>
+    
+</beans>

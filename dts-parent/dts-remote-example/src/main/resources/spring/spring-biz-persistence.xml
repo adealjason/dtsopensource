@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       "
+	default-autowire="byName">
+	
+	<bean id="biz_tddl-dataSource" class="com.taobao.tddl.jdbc.group.TGroupDataSource"
+		init-method="init">
+		<property name="appName" value="INVESTMENT_ONE_TST_APP" />
+		<property name="dbGroupKey" value="INVESTMENT_ONE_TST_00_GROUP" />
+	</bean>
+	
+    
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/tx    
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName">
+	
+	<context:component-scan base-package="org.github.dtsopensource.server"/>
+	
+	<!-- dts persistence -->
+	<import resource="classpath*:dtsserver/spring-dts-persistence.xml"/>
+	
+	<!-- dts hsf -->
+<!-- 	<import resource="classpath*:dtsserver/spring-dts-hsf-provider.xml"/> -->
+	
+	<!-- dts-schedule -->
+	<import resource="classpath*:dtsserver/spring-dts-schedule.xml"/>
+	
+	<!-- dts-activity_rule -->
+	<import resource="classpath*:dtsserver/spring-dts-activity_rule.xml"/>
+	
+	<!-- dts core -->
+	<import resource="classpath*:dtscore/spring-dts-core.xml"/>
+	
+</beans>

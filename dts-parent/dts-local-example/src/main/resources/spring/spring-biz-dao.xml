@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       ">
+       
+	<bean id="tddlSqlSessionFactory-biz" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="biz_tddl-dataSource" />
+		<property name="mapperLocations">
+			<list>
+			    <value>classpath*:sqlmap/DtsTestDOMapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="tddlSqlSession-biz" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="tddlSqlSessionFactory-biz" />
+		<constructor-arg index="1" value="SIMPLE" />
+	</bean>
+	
+	<!-- mapper scanner configurer -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.github.dtsopensource.local.test.dao.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="tddlSqlSessionFactory-biz" />
+	</bean>
+</beans>

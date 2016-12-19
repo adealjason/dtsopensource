@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       ">
+
+	<context:component-scan base-package="org.github.dtsopensource.server.web"/> 
+
+	<bean id="stringConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- spring4.x 输出对象转JSON支持 -->
+	<!-- <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
+	<!-- <property name="supportedMediaTypes"> -->
+	<!-- <list> -->
+	<!-- <value>text/html;charset=UTF-8</value> -->
+	<!-- <value>text/json;charset=UTF-8</value> -->
+	<!-- <value>application/json;charset=UTF-8</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	
+	<!-- spring3.x 输出对象转JSON支持-->
+	<bean id="jsonConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringConverter" />
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<mvc:annotation-driven />
+	<!-- 静态文件的访问映射 -->
+	<mvc:default-servlet-handler />
+	<mvc:resources mapping="/ok.htm" location="/ok.htm" />
+
+</beans>
