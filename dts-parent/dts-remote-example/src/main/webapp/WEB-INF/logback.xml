@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration. -->
+<configuration debug="false">
+	<appender name="RollingFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
+		<file>${za-finance-clean.log.dir}/za-finance-clean.log
+		</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder charset="GBK"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="info"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
+		<file>${za-finance-clean.log.dir}/za-finance-clean-info.log
+		</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-info-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder charset="GBK"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="warn"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
+		<file>${za-finance-clean.log.dir}/za-finance-clean-warn.log
+		</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-warn-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder charset="GBK"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
+		<file>${za-finance-clean.log.dir}/monitor_za-finance-clean_error.log
+		</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-error-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder charset="GBK"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<logger name="org.apache">
+		<level value="INFO" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="INFO" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<logger name="com.zhongan">
+		<level value="INFO" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<logger name="com.netflix">
+		<level value="INFO" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<logger name="com.alibaba.citrus.springext.support.context">
+		<level value="INFO" />
+		<appender-ref ref="info" />
+		<appender-ref ref="error" />
+	</logger>
+
+	<root>
+		<level value="${za-finance-clean.log.level}" />
+		<appender-ref ref="RollingFile" />
+		<appender-ref ref="info" />
+		<appender-ref ref="warn" />
+		<appender-ref ref="error" />
+	</root>
+
+</configuration>
