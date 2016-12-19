@@ -1,0 +1,51 @@
+/*
+ * Copyright 2016 Zhongan.com All right reserved. This software is the
+ * confidential and proprietary information of Zhongan.com ("Confidential
+ * Information"). You shall not disclose such Confidential Information and shall
+ * use it only in accordance with the terms of the license agreement you entered
+ * into with Zhongan.com.
+ */
+package org.github.dtsopensource.core;
+
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+/**
+ * @author ligaofeng 2016年12月8日 上午11:30:57
+ */
+public class DTSCoreSpringHolder implements ApplicationContextAware {
+
+    private static ApplicationContext applicationContext;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        DTSCoreSpringHolder.applicationContext = applicationContext;
+    }
+
+    /**
+     * @param beanId
+     * @return
+     * @throws BeansException
+     */
+    public static Object getBean(String beanId) {
+        return applicationContext.getBean(beanId);
+    }
+
+    /**
+     * @param requiredType
+     * @return
+     */
+    public static <T> T getBean(Class<T> requiredType) {
+        return applicationContext.getBean(requiredType);
+    }
+
+    /**
+     * @param beanId
+     * @param requiredType
+     * @return
+     */
+    public static <T> T getBean(String beanId, Class<T> requiredType) {
+        return applicationContext.getBean(beanId, requiredType);
+    }
+}
