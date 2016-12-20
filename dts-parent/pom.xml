@@ -310,32 +310,4 @@
 			<email>534242309@qq.com</email>
 		</developer>
 	</developers>
-
-	<!-- deploy -->
-	<repositories>
-		<repository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>http://192.168.197.129:8081/nexus/content/repositories/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<name>nexus-snapshots</name>
-			<url>http://192.168.197.129:8081/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>nexus-releases</id>
-			<name>nexus-releases</name>
-			<url>http://192.168.197.129:8081/nexus/content/repositories/releases/</url>
-		</repository>
-	</distributionManagement>
 </project>
