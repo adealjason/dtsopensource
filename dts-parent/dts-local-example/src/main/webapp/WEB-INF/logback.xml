@@ -7,10 +7,10 @@
 			<level>INFO</level>
 		</filter>
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>/alidata1/admin/dts-local-example/dts-server.log
+		<file>/alidata1/admin/dts-local-example/dts-local-example.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/alidata1/admin/dts-local-example/dts-server-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-local-example/dts-local-example-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -22,10 +22,10 @@
 	<appender name="info"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>/alidata1/admin/dts-local-example/dts-server-info.log
+		<file>/alidata1/admin/dts-local-example/dts-local-example-info.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/alidata1/admin/dts-local-example/dts-server-info-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-local-example/dts-local-example-info-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -42,10 +42,10 @@
 	<appender name="warn"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>/alidata1/admin/dts-local-example/dts-server-warn.log
+		<file>/alidata1/admin/dts-local-example/dts-local-example-warn.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/alidata1/admin/dts-local-example/dts-server-warn-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-local-example/dts-local-example-warn-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -62,10 +62,10 @@
 	<appender name="error"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>/alidata1/admin/dts-local-example/monitor_dts-server_error.log
+		<file>/alidata1/admin/dts-local-example/monitor_dts-local-example_error.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/alidata1/admin/dts-local-example/dts-server-error-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-local-example/dts-local-example-error-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
