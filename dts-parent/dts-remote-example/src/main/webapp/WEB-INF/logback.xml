@@ -7,10 +7,10 @@
 			<level>INFO</level>
 		</filter>
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>${za-finance-clean.log.dir}/za-finance-clean.log
+		<file>/alidata1/admin/dts-remote-example/za-finance-clean.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-remote-example/za-finance-clean-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -22,10 +22,10 @@
 	<appender name="info"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>${za-finance-clean.log.dir}/za-finance-clean-info.log
+		<file>/alidata1/admin/dts-remote-example/za-finance-clean-info.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-info-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-remote-example/za-finance-clean-info-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -42,10 +42,10 @@
 	<appender name="warn"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>${za-finance-clean.log.dir}/za-finance-clean-warn.log
+		<file>/alidata1/admin/dts-remote-example/za-finance-clean-warn.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-warn-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-remote-example/za-finance-clean-warn-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -62,10 +62,10 @@
 	<appender name="error"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
-		<file>${za-finance-clean.log.dir}/monitor_za-finance-clean_error.log
+		<file>/alidata1/admin/dts-remote-example/monitor_za-finance-clean_error.log
 		</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${za-finance-clean.log.dir}/za-finance-clean-error-%d{yyyy-MM-dd}.log
+			<fileNamePattern>/alidata1/admin/dts-remote-example/za-finance-clean-error-%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -110,7 +110,7 @@
 	</logger>
 
 	<root>
-		<level value="${za-finance-clean.log.level}" />
+		<level value="INFO" />
 		<appender-ref ref="RollingFile" />
 		<appender-ref ref="info" />
 		<appender-ref ref="warn" />
