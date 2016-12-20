@@ -42,7 +42,7 @@
     <bean id="zookeeperJobRegister" class="org.github.dtsopensource.schedule.register.zookeeper.ZookeeperJobRegister">
     	<!-- 要连接的zk地址 -->
     	<property name="zkConnectionString" value="10.139.103.1:2181"></property>
-    	<property name="ephemeralZnodeParent" value="/dtsserver-schedule"></property>
+    	<property name="ephemeralZnodeParent" value="/dts-local-example"></property>
     	<property name="ephemeralZnodeNamePrefix" value="server-"></property>
     </bean>
     
