@@ -13,8 +13,7 @@
 		<property name="password" value="${druid.password}" />
 		<property name="initialSize" value="${druid.initialSize}" />
 		<property name="minIdle" value="${druid.minIdle}" />
-		<property name="maxActive" value="${druid.maxActivie}" />
-		<property name="maxActive" value="${druid.maxActivie}" />
+		<property name="maxActive" value="${druid.maxActive}" />
 	</bean>
 	
     
