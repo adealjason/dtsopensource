@@ -6,7 +6,7 @@
        "
 	default-autowire="byName">
 
-	<bean id="dts_tddl-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="dts_druid-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init">
 		<property name="driverClass" value="${druid.mysql.driver}"></property>
 		<property name="url" value="${druid.jdbc.url}"></property>
@@ -26,7 +26,7 @@
 
 	<!-- dts manager -->
 	<bean id="localDTSManager" class="com.zhongan.dts.manager.LocalDTSManager">
-		<property name="dataSource" ref="dts_tddl-dataSource"></property>
+		<property name="dataSource" ref="dts_druid-dataSource"></property>
 	</bean>
 
 

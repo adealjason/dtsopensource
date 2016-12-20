@@ -7,6 +7,6 @@
 	default-autowire="byName">
 	
 	<bean id="localDTSRule" class="org.github.dtsopensource.server.rule.impl.LocalDTSRule">
-		<property name="dataSource" ref="dts_tddl-dataSource"></property>
+		<property name="dataSource" ref="dts_druid-dataSource"></property>
 	</bean>
 </beans>

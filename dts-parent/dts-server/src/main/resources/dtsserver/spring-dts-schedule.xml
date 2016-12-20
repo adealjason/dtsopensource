@@ -20,7 +20,7 @@
 	 
 	 <!-- dts-server 端HttpServerScheduleProtocol服务 -->
 	 <bean id="httpServerScheduleProtocol" class="com.zhongan.dts.server.schedule.http.impl.HttpServerScheduleProtocol">
-	 	<property name="dataSource" ref="dts_tddl-dataSource"></property>
+	 	<property name="dataSource" ref="dts_druid-dataSource"></property>
 	 	<property name="taskTrackerMap" ref="taskTrackerMap"></property>
 	 </bean>
 	
