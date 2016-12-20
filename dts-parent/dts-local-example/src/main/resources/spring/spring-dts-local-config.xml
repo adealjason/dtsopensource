@@ -14,7 +14,7 @@
 	
     <!-- dts manager -->
     <bean id="localDTSManager" class="org.github.dtsopensource.core.manager.LocalDTSManager">
-    	<property name="dataSource" ref="biz_tddl-dataSource"></property>
+    	<property name="dataSource" ref="biz_druid-dataSource"></property>
     </bean>
     
     <!-- 二阶交易配置 -->
@@ -33,7 +33,7 @@
     	<!-- 系统配置 -->
     	<property name="dtsConfig" ref="dtsConfig"></property>
     	<!-- IDTSStore schedule数据源 -->
-    	<property name="dataSource" ref="biz_tddl-dataSource"></property>
+    	<property name="dataSource" ref="biz_druid-dataSource"></property>
     	<!-- 要执行的任务,目前一个，后续可以拓展成数组，如果配置成数组则表示这些任务的执行上述规则都是一致的 -->
     	<property name="taskTracker" ref="hangTransactionTask"></property>
     </bean>

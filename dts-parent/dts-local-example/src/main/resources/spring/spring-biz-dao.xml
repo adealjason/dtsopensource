@@ -8,7 +8,7 @@
        ">
        
 	<bean id="tddlSqlSessionFactory-biz" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="biz_tddl-dataSource" />
+		<property name="dataSource" ref="biz_druid-dataSource" />
 		<property name="mapperLocations">
 			<list>
 			    <value>classpath*:sqlmap/DtsTestDOMapper.xml</value>

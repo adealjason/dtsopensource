@@ -5,10 +5,16 @@
        "
 	default-autowire="byName">
 	
-	<bean id="biz_tddl-dataSource" class="com.taobao.tddl.jdbc.group.TGroupDataSource"
+	<bean id="biz_druid-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init">
-		<property name="appName" value="INVESTMENT_BATCH_TST_APP" />
-		<property name="dbGroupKey" value="INVESTMENT_BATCH_TST_00_GROUP" />
+		<property name="driverClass" value="${druid.mysql.driver}"></property>
+		<property name="url" value="${druid.jdbc.url}"></property>
+		<property name="username" value="${druid.username}" />
+		<property name="password" value="${druid.password}" />
+		<property name="initialSize" value="${druid.initialSize}" />
+		<property name="minIdle" value="${druid.minIdle}" />
+		<property name="maxActive" value="${druid.maxActivie}" />
+		<property name="maxActive" value="${druid.maxActivie}" />
 	</bean>
 	
 </beans>
