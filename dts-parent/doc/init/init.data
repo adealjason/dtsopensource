@@ -1,0 +1,2 @@
+insert into `dts_activity_rule` (`biz_type`, `app`, `app_cname`, `biz_type_name`, `is_deleted`, `gmt_created`, `gmt_modified`, `creator`, `modifier`) values('dts-local-example','JRTZ','local模式测试','申购','N',now(),now(),'system','system');
+insert into `dts_activity_rule` (`biz_type`, `app`, `app_cname`, `biz_type_name`, `is_deleted`, `gmt_created`, `gmt_modified`, `creator`, `modifier`) values('dts-remote-example','JRTZ','remote模式测试','申购','N',now(),now(),'system','system');
