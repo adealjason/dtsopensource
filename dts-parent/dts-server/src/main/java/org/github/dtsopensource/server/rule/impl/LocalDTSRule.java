@@ -53,15 +53,16 @@ public class LocalDTSRule implements IDTSRule {
     public ResultBase<ActivityRuleEntity> checkBizType(final String bizType) {
         ResultBase<ActivityRuleEntity> checkResultBase = new ResultBase<ActivityRuleEntity>();
         try {
-            DtsActivityRuleDO dtsActivityRuleDO = jdbcTemplate.queryForObject(
+            List<DtsActivityRuleDO> dtsActivityRuleList = jdbcTemplate.query(
                     ActivityRuleSqlConstance.select_dts_activity_by_biztype, new Object[] { bizType },
                     new DtsActivityRuleRowMapper());
 
-            if (dtsActivityRuleDO == null) {
+            if (CollectionUtils.isEmpty(dtsActivityRuleList)) {
                 checkResultBase.setDtsResultCode(DTSResultCode.FAIL);
                 checkResultBase.setMessage("业务活动" + bizType + "尚未定义,请联系dts-server系统管理员配置");
                 return checkResultBase;
             }
+            DtsActivityRuleDO dtsActivityRuleDO = dtsActivityRuleList.get(0);
             ActivityRuleEntity activityRuleEntity = ActivityRuleHelper.toActivityRuleEntity(dtsActivityRuleDO);
             checkResultBase.setDtsResultCode(DTSResultCode.SUCCESS);
             checkResultBase.setValue(activityRuleEntity);
