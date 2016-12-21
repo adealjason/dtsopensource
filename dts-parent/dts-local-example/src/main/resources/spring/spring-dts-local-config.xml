@@ -52,4 +52,7 @@
     	<property name="cron" value="0 0/1 * * * ?"></property>
     </bean>
     
+    <!--  任务bean定义 -->
+    <bean id="hangTransactionTask" class="org.github.dtsopensource.schedule.taskTracker.task.HangTransactionTask"></bean>
+    
 </beans>
