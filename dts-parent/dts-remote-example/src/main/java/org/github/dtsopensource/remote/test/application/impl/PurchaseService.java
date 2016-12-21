@@ -46,7 +46,7 @@ public class PurchaseService implements IPurchaseService {
             public String doInTransaction(TransactionStatus status) {
                 String activityId = ActivityIdGenerator.getUUUId();
                 try {
-                    DTSContext context = businessActivityControlService.start("za-finance-clean-purchase");
+                    DTSContext context = businessActivityControlService.start("dts-remote-example");
                     activityId = context.getActivityId();
                     context.addArgs(PurchaseContext.class.getName(), purchaseContext);
 
