@@ -7,7 +7,7 @@
 	
 	<bean id="biz_druid-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init">
-		<property name="driverClass" value="${druid.mysql.driver}"></property>
+		<property name="driverClassName" value="${druid.mysql.driver}"></property>
 		<property name="url" value="${druid.jdbc.url}"></property>
 		<property name="username" value="${druid.username}" />
 		<property name="password" value="${druid.password}" />

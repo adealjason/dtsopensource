@@ -8,7 +8,7 @@
 
 	<bean id="dts_druid-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init">
-		<property name="driverClass" value="${druid.mysql.driver}"></property>
+		<property name="driverClassName" value="${druid.mysql.driver}"></property>
 		<property name="url" value="${druid.jdbc.url}"></property>
 		<property name="username" value="${druid.username}" />
 		<property name="password" value="${druid.password}" />
@@ -18,13 +18,13 @@
 	</bean>
 
 	<!-- dts连接方式 -->
-	<bean id="dtsConfig" class="com.zhongan.dts.server.share.DTSConfig">
+	<bean id="dtsConfig" class="org.github.dtsopensource.server.share.DTSConfig">
 		<property name="dtsManageType" value="LOCAL"></property>
 		<property name="app" value="JRTZ"></property>
 	</bean>
 
 	<!-- dts manager -->
-	<bean id="localDTSManager" class="com.zhongan.dts.manager.LocalDTSManager">
+	<bean id="localDTSManager" class="org.github.dtsopensource.core.manager.LocalDTSManager">
 		<property name="dataSource" ref="dts_druid-dataSource"></property>
 	</bean>
 
