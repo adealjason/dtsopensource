@@ -21,6 +21,7 @@
 	<bean id="dtsConfig" class="org.github.dtsopensource.server.share.DTSConfig">
 		<property name="dtsManageType" value="LOCAL"></property>
 		<property name="app" value="JRTZ"></property>
+		<property name="requestActivityRuleURL" value="http://10.139.53.19:9080/dtsServer/requestRule"></property>
 	</bean>
 
 	<!-- dts manager -->

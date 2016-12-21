@@ -91,7 +91,7 @@
 		<appender-ref ref="error" />
 	</logger>
 
-	<logger name="com.zhongan">
+	<logger name="org.github.dtsopensource">
 		<level value="INFO" />
 		<appender-ref ref="info" />
 		<appender-ref ref="error" />

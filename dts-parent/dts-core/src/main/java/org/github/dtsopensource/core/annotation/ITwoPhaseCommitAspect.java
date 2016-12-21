@@ -18,15 +18,15 @@ public class ITwoPhaseCommitAspect {
     @Resource
     private AopHandler actionAroundAophandler;
 
-    @Pointcut(value = "execution(* com.zhongan.dts.ITwoPhaseCommit.pre(..))")
+    @Pointcut(value = "execution(* org.github.dtsopensource.core.ITwoPhaseCommit.pre(..))")
     public void prePointcut() {
     }
 
-    @Pointcut(value = "execution(* com.zhongan.dts.ITwoPhaseCommit.commit(..))")
+    @Pointcut(value = "execution(* org.github.dtsopensource.core.ITwoPhaseCommit.commit(..))")
     public void commitPointcut() {
     }
 
-    @Pointcut(value = "execution(* com.zhongan.dts.ITwoPhaseCommit.rollback(..))")
+    @Pointcut(value = "execution(* org.github.dtsopensource.core.ITwoPhaseCommit.rollback(..))")
     public void rollbackPointcut() {
     }
 

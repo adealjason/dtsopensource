@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhongan.dao.mapper.DtsTestDOMapper" >
-  <resultMap id="BaseResultMap" type="com.zhongan.dao.dataobject.DtsTestDO" >
+<mapper namespace="org.github.dtsopensource.local.test.dao.mapper.DtsTestDOMapper" >
+  <resultMap id="BaseResultMap" type="org.github.dtsopensource.local.test.dao.dataobject.DtsTestDO" >
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="value" property="value" jdbcType="VARCHAR" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     name, value
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhongan.dao.dataobject.DtsTestDOExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.github.dtsopensource.local.test.dao.dataobject.DtsTestDOExample" >
     select
     <if test="distinct" >
       distinct
@@ -81,11 +81,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <insert id="insert" parameterType="com.zhongan.dao.dataobject.DtsTestDO" >
+  <insert id="insert" parameterType="org.github.dtsopensource.local.test.dao.dataobject.DtsTestDO" >
     insert into dts_test (name, value)
     values (#{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhongan.dao.dataobject.DtsTestDO" >
+  <insert id="insertSelective" parameterType="org.github.dtsopensource.local.test.dao.dataobject.DtsTestDO" >
     insert into dts_test
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="name != null" >

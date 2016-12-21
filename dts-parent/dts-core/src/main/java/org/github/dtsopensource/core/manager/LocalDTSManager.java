@@ -12,10 +12,12 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by ligaofeng on 2016/10/31.
  */
+@Slf4j
 @ToString
 public class LocalDTSManager extends DTSManager {
 
@@ -31,6 +33,7 @@ public class LocalDTSManager extends DTSManager {
         if (dataSource == null) {
             throw new DTSRuntimeException("local模式下必须指定DataSource数据源");
         }
+        log.info("--->LocalDTSManager check ok...");
     }
 
     @Override
