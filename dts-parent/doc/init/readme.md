@@ -13,5 +13,8 @@ dts-server-share.jar：内部使用jar，业务系统可以不关注
 1)数据库初始化，执行init.sql文件创建相应的数据库
 2)数据初始化，执行init.data文件初始化相应表数据
 
+##3.创建测试日志目录
+mkdir /alidata1/admin/dtslog
+
 ##3.测试连接：
 http://ip:port/product/purchase?productName=爆炒牛肚&orderAmount=23&currentAmount=50
