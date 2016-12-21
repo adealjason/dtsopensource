@@ -47,6 +47,7 @@
 		<quartz.version>1.5.2</quartz.version>
 		<zookeeper.version>3.3.6</zookeeper.version>
 		<druid.version>1.0.26</druid.version>
+		<mysql.version>5.1.6</mysql.version>
 	</properties>
 
 	<dependencyManagement>
@@ -127,7 +128,11 @@
 				<artifactId>druid</artifactId>
 				<version>${druid.version}</version>
 			</dependency>
-			<!-- orm -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
