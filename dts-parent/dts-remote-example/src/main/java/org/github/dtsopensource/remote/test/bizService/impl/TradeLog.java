@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service("tradeLog")
 public class TradeLog implements ITradeLog {
 
-    private static final String dtslogRootPath = "dtslog/";
+    private static final String dtslogRootPath = "/alidata1/admin/dtslog";
 
     @Override
     public void saveTradeLog(String operation, String tradeLog) {
