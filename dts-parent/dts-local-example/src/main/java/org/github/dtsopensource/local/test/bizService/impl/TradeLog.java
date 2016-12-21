@@ -46,7 +46,7 @@ public class TradeLog implements ITradeLog {
         if (CollectionUtils.isNotEmpty(logs) && logs.contains(tradeLog)) {
             return;
         }
-        this.saveTradeLog(operation, tradeLog);
+        this.saveTradeLog(activityId, operation, tradeLog);
 
     }
 
