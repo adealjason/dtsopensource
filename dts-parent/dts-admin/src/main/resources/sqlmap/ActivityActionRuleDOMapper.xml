@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.github.dtsopensource.admin.dao.mapper.ActivityActionRuleDOMapper" >
+  <resultMap id="BaseResultMap" type="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDO" >
+    <id column="biz_action" property="bizAction" jdbcType="VARCHAR" />
+    <result column="biz_action_name" property="bizActionName" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="service" property="service" jdbcType="VARCHAR" />
+    <result column="clazz_name" property="clazzName" jdbcType="VARCHAR" />
+    <result column="trans_recovery_id" property="transRecoveryId" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    biz_action, biz_action_name, biz_type, service, clazz_name, trans_recovery_id, is_deleted, 
+    gmt_created, gmt_modified, creator, modifier
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dts_activity_action_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dts_activity_action_rule
+    where biz_action = #{bizAction,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dts_activity_action_rule
+    where biz_action = #{bizAction,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDO" >
+    insert into dts_activity_action_rule (biz_action, biz_action_name, biz_type, 
+      service, clazz_name, trans_recovery_id, 
+      is_deleted, gmt_created, gmt_modified, 
+      creator, modifier)
+    values (#{bizAction,jdbcType=VARCHAR}, #{bizActionName,jdbcType=VARCHAR}, #{bizType,jdbcType=VARCHAR}, 
+      #{service,jdbcType=VARCHAR}, #{clazzName,jdbcType=VARCHAR}, #{transRecoveryId,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=CHAR}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDO" >
+    insert into dts_activity_action_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bizAction != null" >
+        biz_action,
+      </if>
+      <if test="bizActionName != null" >
+        biz_action_name,
+      </if>
+      <if test="bizType != null" >
+        biz_type,
+      </if>
+      <if test="service != null" >
+        service,
+      </if>
+      <if test="clazzName != null" >
+        clazz_name,
+      </if>
+      <if test="transRecoveryId != null" >
+        trans_recovery_id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bizAction != null" >
+        #{bizAction,jdbcType=VARCHAR},
+      </if>
+      <if test="bizActionName != null" >
+        #{bizActionName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="clazzName != null" >
+        #{clazzName,jdbcType=VARCHAR},
+      </if>
+      <if test="transRecoveryId != null" >
+        #{transRecoveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreated != null" >
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dts_activity_action_rule
+    <set >
+      <if test="record.bizAction != null" >
+        biz_action = #{record.bizAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizActionName != null" >
+        biz_action_name = #{record.bizActionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizType != null" >
+        biz_type = #{record.bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service != null" >
+        service = #{record.service,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clazzName != null" >
+        clazz_name = #{record.clazzName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transRecoveryId != null" >
+        trans_recovery_id = #{record.transRecoveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="record.gmtCreated != null" >
+        gmt_created = #{record.gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifier != null" >
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dts_activity_action_rule
+    set biz_action = #{record.bizAction,jdbcType=VARCHAR},
+      biz_action_name = #{record.bizActionName,jdbcType=VARCHAR},
+      biz_type = #{record.bizType,jdbcType=VARCHAR},
+      service = #{record.service,jdbcType=VARCHAR},
+      clazz_name = #{record.clazzName,jdbcType=VARCHAR},
+      trans_recovery_id = #{record.transRecoveryId,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      gmt_created = #{record.gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDO" >
+    update dts_activity_action_rule
+    <set >
+      <if test="bizActionName != null" >
+        biz_action_name = #{bizActionName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        biz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        service = #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="clazzName != null" >
+        clazz_name = #{clazzName,jdbcType=VARCHAR},
+      </if>
+      <if test="transRecoveryId != null" >
+        trans_recovery_id = #{transRecoveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where biz_action = #{bizAction,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityActionRuleDO" >
+    update dts_activity_action_rule
+    set biz_action_name = #{bizActionName,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      service = #{service,jdbcType=VARCHAR},
+      clazz_name = #{clazzName,jdbcType=VARCHAR},
+      trans_recovery_id = #{transRecoveryId,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR}
+    where biz_action = #{bizAction,jdbcType=VARCHAR}
+  </update>
+</mapper>

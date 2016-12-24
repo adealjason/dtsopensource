@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.github.dtsopensource.admin.dao.mapper.ActivityRuleDOMapper" >
+  <resultMap id="BaseResultMap" type="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDO" >
+    <id column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="app" property="app" jdbcType="VARCHAR" />
+    <result column="app_cname" property="appCname" jdbcType="VARCHAR" />
+    <result column="biz_type_name" property="bizTypeName" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    biz_type, app, app_cname, biz_type_name, is_deleted, gmt_created, gmt_modified, creator, 
+    modifier
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dts_activity_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dts_activity_rule
+    where biz_type = #{bizType,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dts_activity_rule
+    where biz_type = #{bizType,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDO" >
+    insert into dts_activity_rule (biz_type, app, app_cname, 
+      biz_type_name, is_deleted, gmt_created, 
+      gmt_modified, creator, modifier
+      )
+    values (#{bizType,jdbcType=VARCHAR}, #{app,jdbcType=VARCHAR}, #{appCname,jdbcType=VARCHAR}, 
+      #{bizTypeName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{gmtCreated,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDO" >
+    insert into dts_activity_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bizType != null" >
+        biz_type,
+      </if>
+      <if test="app != null" >
+        app,
+      </if>
+      <if test="appCname != null" >
+        app_cname,
+      </if>
+      <if test="bizTypeName != null" >
+        biz_type_name,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bizType != null" >
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="app != null" >
+        #{app,jdbcType=VARCHAR},
+      </if>
+      <if test="appCname != null" >
+        #{appCname,jdbcType=VARCHAR},
+      </if>
+      <if test="bizTypeName != null" >
+        #{bizTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreated != null" >
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dts_activity_rule
+    <set >
+      <if test="record.bizType != null" >
+        biz_type = #{record.bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app != null" >
+        app = #{record.app,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appCname != null" >
+        app_cname = #{record.appCname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizTypeName != null" >
+        biz_type_name = #{record.bizTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="record.gmtCreated != null" >
+        gmt_created = #{record.gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifier != null" >
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dts_activity_rule
+    set biz_type = #{record.bizType,jdbcType=VARCHAR},
+      app = #{record.app,jdbcType=VARCHAR},
+      app_cname = #{record.appCname,jdbcType=VARCHAR},
+      biz_type_name = #{record.bizTypeName,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      gmt_created = #{record.gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDO" >
+    update dts_activity_rule
+    <set >
+      <if test="app != null" >
+        app = #{app,jdbcType=VARCHAR},
+      </if>
+      <if test="appCname != null" >
+        app_cname = #{appCname,jdbcType=VARCHAR},
+      </if>
+      <if test="bizTypeName != null" >
+        biz_type_name = #{bizTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where biz_type = #{bizType,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.github.dtsopensource.admin.dao.dataobject.ActivityRuleDO" >
+    update dts_activity_rule
+    set app = #{app,jdbcType=VARCHAR},
+      app_cname = #{appCname,jdbcType=VARCHAR},
+      biz_type_name = #{bizTypeName,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR}
+    where biz_type = #{bizType,jdbcType=VARCHAR}
+  </update>
+</mapper>

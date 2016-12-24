@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>分布式事务服务管理系统</title>
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/css/dashboard.css" rel="stylesheet">
+<link href="/css/plugin/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/css/plugin/bootstraptable/bootstrap-table.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="/favicon.png">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/dtsAdmin/console">分布式事务服务系统</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Help</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-pills nav-stacked" role="tablist">
+					<li role="presentation" class="active"><a
+						href="/dtsAdmin/console">业务活动管理</a></li>
+					<li role="presentation"><a href="#">业务活动查询</a></li>
+					<li role="presentation"><a href="#">Messages</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h3 class="page-header">业务活动配置</h3>
+
+				<table width="95%" align="center" border="0">
+					<form action="create.do" method="post" class="form-inline">
+						<tr height="45px">
+							<td width="14%"><label
+								style="color: red; padding-right: 5px;"> * </label>业务活动</td>
+							<td width="36%" height="90%"><input type="text" id="bizType"
+								name="projectName" size="22" class="form-control" /></td>
+							<td width="14%" style="padding-left: 15px;"><label
+								style="color: red; padding-right: 5px;"> * </label>业务活动名称</td>
+							<td width="36%" height="90%"><input type="text"
+								id="bizTypeName" size="22" class="form-control" /></td>
+						</tr>
+						<tr height="45px">
+							<td width="14%"><label
+								style="color: red; padding-right: 5px;"> * </label>归属系统</td>
+							<td width="36%" height="90%"><input type="text" id="app"
+								name="projectName" size="22" class="form-control" /></td>
+							<td width="14%" style="padding-left: 15px;"><label
+								style="color: red; padding-right: 5px;"> * </label>归属系统名称</td>
+							<td width="36%" height="90%"><input type="text"
+								id="appCname" size="22" class="form-control" /></td>
+						</tr>
+						<tr>
+							<td width="15%"></td>
+							<td align="right"><br /> <input id="submitForm"
+								type="button" class="btn btn-primary" value="新增" /></td>
+							<td colspan="2" width="40%"></td>
+						</tr>
+					</form>
+				</table>
+
+				<h4 class="sub-header">查询结果</h4>
+				<div class="table-responsive">
+					<table data-toggle="table" id="activityTable" class="table table-striped">
+						<thead>
+							<tr>
+								<th data-field="bizType">业务活动</th>
+								<th data-field="bizTypeName">业务活动名称</th>
+								<th data-field="app">归属系统</th>
+								<th data-field="appCname">归属系统名称</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!--     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script> -->
+	<script src="/js/jquery-2.1.1.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/docs.min.js"></script>
+	<script src="/js/plugin/sweetalert/sweetalert.js"></script>
+	<script src="/js/plugin/bootstraptable/bootstrap-table.min.js"></script>
+	<script src="/js/plugin/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#submitForm').click(function() {
+			var flag = submitActivityCheck();
+			if (flag) {
+				swal({
+					title : "您确定要提交吗？",
+					text : "您确定要提交这条数据？",
+					type : "warning",
+					showCancelButton : true,
+					closeOnConfirm : false,
+					confirmButtonText : "是的，我要提交",
+					confirmButtonColor : "#ec6c62"
+				}, function() {
+					var appCname = $('#appCname').val();
+					var app = $('#app').val();
+					var bizTypeName = $('#bizTypeName').val();
+					var bizType = $('#bizType').val();
+					$.ajax({
+						url : "/dtsAdmin/submitActivity",
+						type : "POST",
+						dataType: 'json',
+                		data: {"appCname": appCname,"app":app,"bizTypeName":bizTypeName,"bizType":bizType}
+					}).done(function(data) {
+						checkResult(data);
+						reload();
+						reset();
+					}).error(function(data) {
+						swal("OMG", "提交操作失败了", "error");
+					});
+				});
+			}
+
+		});
+	});
+	
+	function reload(){
+		var app=$('#app').val();
+		$.ajax({
+			url : "/dtsAdmin/queryActivity",
+			type : "POST",
+			dataType: 'json',
+    		data: {"app": app}
+		}).done(function(data) {
+			showList(data);
+		}).error(function(data) {
+		});
+	}
+	
+	function showList(data){
+		var result=data['result'];
+		var list =data['list']
+		if(result=='SUCCESS'){
+			$("#activityTable tr:not(:first)").empty();
+			for(var i =0;i<list.length;i++){
+				var activity=list[i];
+				var trHTML="<tr><td>"+activity.bizType+"</td><td>"+activity.bizTypeName+"</td><td>"+activity.app+"</td><td>"+activity.appCname+"</td></tr>";
+				$("#activityTable").append(trHTML);
+			}
+		}
+	}
+	
+	function reset(){
+		$('#appCname').val('');
+		$('#app').val('');
+		$('#bizTypeName').val('');
+		$('#bizType').val('');
+	}
+	
+	function checkResult(data){
+		var result=data['result'];
+		var message=data['message'];
+		if(result=='SUCCESS'){
+			swal("操作成功", "已成功提交数据", "success");
+		}else{
+			if(message==''){
+				message="提交操作失败了";
+			}
+			swal("OMG", message, "error");
+		}
+	}
+
+	function submitActivityCheck() {
+		var appCname = $('#appCname').val();
+		if (appCname == '') {
+			sweetAlert("OMG!", "归属系统名称不能为空", "error");
+			return false;
+		}
+		var app = $('#app').val();
+		if (app == '') {
+			sweetAlert("OMG!", "归属系统不能为空", "error");
+			return false;
+		}
+		var bizTypeName = $('#bizTypeName').val();
+		if (bizTypeName == '') {
+			sweetAlert("OMG!", "业务活动名称不能为空", "error");
+			return false;
+		}
+		var bizType = $('#bizType').val();
+		if (bizType == '') {
+			sweetAlert("OMG!", "业务活动不能为空", "error");
+			return false;
+		}
+		return true;
+	}
+</script>
